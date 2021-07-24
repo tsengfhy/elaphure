@@ -1,0 +1,7 @@
+spring:
+  messages:
+    fallback-to-system-locale: false
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+      INDENT_OUTPUT: true
