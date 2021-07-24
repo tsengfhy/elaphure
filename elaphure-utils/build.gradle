@@ -1,4 +1,5 @@
 dependencies {
-    compileOnly 'org.springframework.boot:spring-boot-starter'
+    implementation project(':elaphure-context')
     api 'org.apache.commons:commons-lang3'
+    implementation 'com.google.code.gson:gson'
 }

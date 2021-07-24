@@ -3,6 +3,7 @@ buildscript {
         springBootVersion = '2.4.2'
         springCloudVersion = '2020.0.0'
         springCloudAlibabaVersion = '2021.1'
+        mapStructVersion = '1.4.2.Final'
     }
 
     repositories {
@@ -41,6 +42,9 @@ subprojects {
         annotationProcessor "org.projectlombok:lombok"
         testCompileOnly "org.projectlombok:lombok"
         testAnnotationProcessor "org.projectlombok:lombok"
+        implementation 'org.mapstruct:mapstruct'
+        annotationProcessor 'org.mapstruct:mapstruct-processor'
+        testAnnotationProcessor 'org.mapstruct:mapstruct-processor'
     }
 
     dependencyManagement {
@@ -50,6 +54,8 @@ subprojects {
         }
 
         dependencies {
+            dependency "org.mapstruct:mapstruct:${mapStructVersion}"
+            dependency "org.mapstruct:mapstruct-processor:${mapStructVersion}"
         }
     }
 

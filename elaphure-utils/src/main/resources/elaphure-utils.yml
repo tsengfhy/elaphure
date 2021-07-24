@@ -1,0 +1,6 @@
+#customized parameters
+spring:
+  messages:
+    fallback-to-system-locale: false
+  gson:
+    pretty-printing: true
