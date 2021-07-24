@@ -3,7 +3,6 @@ buildscript {
         springBootVersion = '2.4.2'
         springCloudVersion = '2020.0.0'
         springCloudAlibabaVersion = '2021.1'
-        lombokVersion = '1.18.20'
     }
 
     repositories {
@@ -18,7 +17,7 @@ buildscript {
 
 allprojects {
     group = 'com.tsengfhy.elaphure'
-    version = '1.0.0-SNAPSHOT'
+    version = '2.4.0-SNAPSHOT'
 }
 
 subprojects {
@@ -35,15 +34,13 @@ subprojects {
         mavenCentral()
     }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
-
     dependencies {
-        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        compileOnly 'org.springframework.boot:spring-boot-starter'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
     }
 
     dependencyManagement {
