@@ -1,13 +1,11 @@
 buildscript {
     ext {
-        springBootVersion = '2.4.2'
-        springCloudVersion = '2020.0.0'
+        springBootVersion = '2.7.18'
+        springCloudVersion = '2021.0.9'
         springCloudAlibabaVersion = '2021.1'
-        lombokVersion = '1.18.20'
     }
 
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
 
@@ -31,19 +29,17 @@ subprojects {
     targetCompatibility = JavaVersion.VERSION_11
 
     repositories {
-        maven { url 'https://maven.aliyun.com/repository/public' }
         mavenCentral()
     }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
-
     dependencies {
-        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        implementation 'org.springframework.boot:spring-boot-starter'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
     }
 
     dependencyManagement {

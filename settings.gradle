@@ -1,3 +1,4 @@
 rootProject.name = 'elaphure'
 
+include(':elaphure-context')
 include(':elaphure-utils')
