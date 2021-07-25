@@ -1,0 +1,4 @@
+elaphure:
+  web:
+    cors:
+      allowed-origins: www.elaphure.com
