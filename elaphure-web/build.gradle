@@ -1,0 +1,14 @@
+ext {
+    antisamyVersion = "1.7.5"
+    commonsTextVersion = "1.10.0"
+}
+
+dependencies {
+    implementation project(":elaphure-context")
+    implementation project(":elaphure-utils")
+    api "org.springframework.boot:spring-boot-starter-web"
+    api "org.springframework.boot:spring-boot-starter-validation"
+    api "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.owasp.antisamy:antisamy:${antisamyVersion}"
+    implementation "org.apache.commons:commons-text:${commonsTextVersion}"
+}

@@ -1,0 +1,10 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+elaphure:
+  web:
+    cors:
+      allowed-origin-patterns:
+        - https://*.elaphure.com
