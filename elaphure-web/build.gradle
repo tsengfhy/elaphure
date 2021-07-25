@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':elaphure-context')
+    implementation project(':elaphure-utils')
+    api 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.google.code.gson:gson'
+}
