@@ -3,5 +3,6 @@ dependencies {
     implementation project(':elaphure-utils')
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.google.code.gson:gson'
 }

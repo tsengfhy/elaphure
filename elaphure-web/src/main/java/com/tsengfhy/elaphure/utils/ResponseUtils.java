@@ -33,7 +33,7 @@ public final class ResponseUtils {
                 status,
                 error,
                 e.getClass().getName(),
-                e.getMessage(),
+                ExceptionExtUtils.getMessage(e),
                 ExceptionUtils.getStackTrace(e),
                 null
         );

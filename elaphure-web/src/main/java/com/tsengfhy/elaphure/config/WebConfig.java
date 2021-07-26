@@ -5,14 +5,23 @@ import com.tsengfhy.elaphure.env.WebProperties;
 import com.tsengfhy.elaphure.support.YamlPropertySourceFactory;
 import com.tsengfhy.elaphure.web.cors.OrderedCorsFilter;
 import com.tsengfhy.elaphure.web.cors.RestCorsProcessor;
+import com.tsengfhy.elaphure.web.error.AdvancedErrorAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -20,6 +29,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication
+@AutoConfigureAfter({MessageSourceAutoConfiguration.class})
+@AutoConfigureBefore({ErrorMvcAutoConfiguration.class})
 @PropertySource(value = "classpath:elaphure-web.yml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
 @EnableConfigurationProperties({WebProperties.class})
 public class WebConfig implements WebMvcConfigurer {
@@ -53,5 +64,30 @@ public class WebConfig implements WebMvcConfigurer {
         CorsFilter filter = new OrderedCorsFilter(corsConfigurationSource);
         filter.setCorsProcessor(new RestCorsProcessor());
         return filter;
+    }
+
+    /**
+     * For i18n, based on Accept Header by default, and this is enough.
+     *
+     * @see org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration.EnableWebMvcConfiguration#localeResolver
+     */
+    @Autowired
+    private MessageSource messageSource;
+
+    /**
+     * For validation, using ValidationMessages.properties as resource bundle by default, and here if {@link MessageSource} exists, using messages.properties instead.
+     *
+     * @see org.hibernate.validator.internal.engine.AbstractConfigurationImpl#getDefaultResourceBundleLocator
+     */
+    @Override
+    public Validator getValidator() {
+        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+        validator.setValidationMessageSource(messageSource);
+        return validator;
+    }
+
+    @Bean
+    public ErrorAttributes errorAttributes() {
+        return new AdvancedErrorAttributes();
     }
 }
