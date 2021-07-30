@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 public class WebProperties {
 
     private final Cors cors = new Cors();
+    private final Xss xss = new Xss();
 
     @Data
     public static class Cors {
@@ -31,5 +32,18 @@ public class WebProperties {
         private boolean allowCredentials = true;
         @DurationUnit(ChronoUnit.SECONDS)
         private Duration maxAge = Duration.ofSeconds(1800);
+    }
+
+    @Data
+    public static class Xss {
+        private boolean enabled = true;
+        private List<String> allowedPaths = Collections.emptyList();
+        private ProcessStrategy processStrategy = ProcessStrategy.FILTER;
+
+        public enum ProcessStrategy {
+            REJECT,
+            FILTER,
+            ENCODE,
+        }
     }
 }

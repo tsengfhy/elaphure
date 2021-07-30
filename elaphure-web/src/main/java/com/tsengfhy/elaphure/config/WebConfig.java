@@ -3,9 +3,12 @@ package com.tsengfhy.elaphure.config;
 import com.tsengfhy.elaphure.constants.Context;
 import com.tsengfhy.elaphure.env.WebProperties;
 import com.tsengfhy.elaphure.support.YamlPropertySourceFactory;
+import com.tsengfhy.elaphure.utils.XssUtils;
 import com.tsengfhy.elaphure.web.cors.OrderedCorsFilter;
 import com.tsengfhy.elaphure.web.cors.RestCorsProcessor;
 import com.tsengfhy.elaphure.web.error.AdvancedErrorAttributes;
+import com.tsengfhy.elaphure.web.servlet.ParameterMappingHttpServletRequest;
+import com.tsengfhy.elaphure.web.servlet.WhitelistFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -16,16 +19,19 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.boot.web.servlet.filter.OrderedFilter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.util.PathMatcher;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.util.UrlPathHelper;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnWebApplication
@@ -64,6 +70,21 @@ public class WebConfig implements WebMvcConfigurer {
         CorsFilter filter = new OrderedCorsFilter(corsConfigurationSource);
         filter.setCorsProcessor(new RestCorsProcessor());
         return filter;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = Context.PREFIX + ".web.xss.enabled", matchIfMissing = true)
+    public WhitelistFilter xssFilter(UrlPathHelper urlPathHelper, PathMatcher pathMatcher) {
+        return WhitelistFilter.builder()
+                .order(OrderedFilter.REQUEST_WRAPPER_FILTER_MAX_ORDER - 90)
+                .urlPathHelper(urlPathHelper)
+                .pathMatcher(pathMatcher)
+                .allowedPaths(properties.getXss().getAllowedPaths())
+                .filter(((request, response, filterChain) -> filterChain.doFilter(
+                        new ParameterMappingHttpServletRequest(request, XssUtils::process),
+                        response
+                )))
+                .build();
     }
 
     /**

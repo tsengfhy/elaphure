@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum WebMessages {
 
     NO_MESSAGE("web.noMessage", "No message available"),
-    CORS_FORBIDDEN("web.corsForbidden", "Invalid CORS request");
+    CORS_FORBIDDEN("web.corsForbidden", "Invalid CORS request"),
+    XSS_REJECT("web.xssReject", "Unexpected character found");
 
     private final String key;
     private final String message;

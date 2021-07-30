@@ -1,6 +1,9 @@
 package com.tsengfhy.elaphure.web;
 
+import com.tsengfhy.elaphure.env.WebProperties;
+import com.tsengfhy.elaphure.utils.JsonUtils;
 import com.tsengfhy.elaphure.utils.MessageUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,6 +40,36 @@ class WebTests {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/unknown"))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.NOT_FOUND.value()));
+    }
+
+    @Autowired
+    WebProperties webProperties;
+
+    @Test
+    void testXss() throws Exception {
+        final String path = "/test";
+        final String xssValue = "hello<script>alert(1)</script>";
+        final String cleanValue = "hello";
+        final TestController.TestDTO dto = new TestController.TestDTO().setValue(xssValue);
+        final WebProperties.Xss.ProcessStrategy processStrategy = webProperties.getXss().getProcessStrategy();
+
+        webProperties.getXss().setProcessStrategy(WebProperties.Xss.ProcessStrategy.FILTER);
+        mockMvc.perform(MockMvcRequestBuilders.get(path).param("value", xssValue))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value(cleanValue));
+        mockMvc.perform(MockMvcRequestBuilders.post(path).content(JsonUtils.toJson(dto)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.value").value(cleanValue));
+
+        webProperties.getXss().setProcessStrategy(WebProperties.Xss.ProcessStrategy.REJECT);
+        mockMvc.perform(MockMvcRequestBuilders.get(path).param("value", xssValue))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()));
+
+        webProperties.getXss().setProcessStrategy(WebProperties.Xss.ProcessStrategy.ENCODE);
+        mockMvc.perform(MockMvcRequestBuilders.get(path).param("value", xssValue))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value(StringEscapeUtils.escapeHtml4(xssValue)));
+        mockMvc.perform(MockMvcRequestBuilders.post(path).content(JsonUtils.toJson(dto)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.value").value(StringEscapeUtils.escapeHtml4(xssValue)));
+
+        webProperties.getXss().setProcessStrategy(processStrategy);
     }
 
     @Autowired

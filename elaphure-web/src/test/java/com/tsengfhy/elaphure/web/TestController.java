@@ -3,16 +3,24 @@ package com.tsengfhy.elaphure.web;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 @RestController
 @RequestMapping("/test")
 public class TestController {
+
+    @GetMapping
+    public String get(String value) {
+        return value;
+    }
+
+    @PostMapping
+    public TestDTO post(@Valid @RequestBody TestDTO dto) {
+        return dto;
+    }
 
     @GetMapping("/error")
     public void error() {
