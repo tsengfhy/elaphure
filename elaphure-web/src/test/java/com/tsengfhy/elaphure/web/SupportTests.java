@@ -1,5 +1,6 @@
 package com.tsengfhy.elaphure.web;
 
+import com.tsengfhy.elaphure.web.servlet.HeaderMutableHttpServletRequest;
 import com.tsengfhy.elaphure.web.servlet.ParameterMappingHttpServletRequest;
 import com.tsengfhy.elaphure.web.servlet.WhitelistFilter;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -52,5 +53,20 @@ public class SupportTests {
         Assertions.assertEquals(requestWrapper.getParameter(name), fixedValue);
         Assertions.assertEquals(requestWrapper.getParameterValues(name)[0], fixedValue);
         Assertions.assertEquals(requestWrapper.getParameterMap().get(name)[0], fixedValue);
+    }
+
+    @Test
+    void testHeaderMutableHttpServletRequest() {
+        final String header = "test";
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        Assertions.assertFalse(request.getHeaderNames().hasMoreElements());
+        Assertions.assertFalse(request.getHeaders(header).hasMoreElements());
+        Assertions.assertNull(request.getHeader(header));
+
+        HeaderMutableHttpServletRequest requestWrapper = new HeaderMutableHttpServletRequest(request);
+        requestWrapper.setHeader(header, RandomStringUtils.random(8));
+        Assertions.assertTrue(requestWrapper.getHeaderNames().hasMoreElements());
+        Assertions.assertTrue(requestWrapper.getHeaders(header).hasMoreElements());
+        Assertions.assertNotNull(requestWrapper.getHeader(header));
     }
 }
