@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':elaphure-context')
+    implementation project(':elaphure-utils')
+    api project(':elaphure-sms')
+    implementation 'com.alibaba.cloud:aliyun-sms-spring-boot-starter'
+}

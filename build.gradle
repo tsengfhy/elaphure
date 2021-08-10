@@ -1,6 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '2.4.2'
+        springBootAliyunVersion = '1.0.0'
         springCloudVersion = '2020.0.0'
         springCloudAlibabaVersion = '2021.1'
         mapStructVersion = '1.4.2.Final'
@@ -50,6 +51,7 @@ subprojects {
 
     dependencyManagement {
         imports {
+            mavenBom "com.alibaba.cloud:aliyun-spring-boot-dependencies:${springBootAliyunVersion}"
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
             mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
             mavenBom "com.github.xiaoymin:knife4j-dependencies:${knife4jVersion}"
