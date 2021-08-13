@@ -1,0 +1,8 @@
+ext {
+    simpleJavaMailVersion = '6.7.6'
+}
+
+dependencies {
+    api 'org.springframework.boot:spring-boot-starter-mail'
+    api "org.simplejavamail:spring-module:${simpleJavaMailVersion}"
+}
