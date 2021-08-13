@@ -1,0 +1,14 @@
+spring:
+  mail:
+    protocol: smtps
+    host: smtpdm.aliyun.com
+    port: 465
+    username: noreply@tsengfhy.com
+    password:
+
+simplejavamail:
+  javaxmail:
+    debug: true
+
+
+

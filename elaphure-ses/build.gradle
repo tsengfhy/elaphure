@@ -1,0 +1,11 @@
+ext {
+    simpleJavaMailVersion = '6.6.1'
+}
+
+dependencies {
+    implementation project(':elaphure-context')
+    implementation project(':elaphure-utils')
+    api 'org.springframework.boot:spring-boot-starter-mail'
+    api "org.simplejavamail:simple-java-mail:${simpleJavaMailVersion}"
+    implementation "org.simplejavamail:spring-module:${simpleJavaMailVersion}"
+}
