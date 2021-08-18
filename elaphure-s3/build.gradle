@@ -1,0 +1,8 @@
+ext {
+    minioVersion = "8.5.2"
+}
+
+dependencies {
+    implementation project(':elaphure-context')
+    api "io.minio:minio:${minioVersion}"
+}
