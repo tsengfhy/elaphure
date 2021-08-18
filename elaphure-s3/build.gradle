@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':elaphure-context')
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    api 'io.minio:minio:8.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+}
