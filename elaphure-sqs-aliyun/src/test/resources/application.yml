@@ -1,0 +1,5 @@
+elaphure:
+  sqs:
+    endpoint: https://1898634214512091.mns.cn-qingdao.aliyuncs.com
+    access-key:
+    secret-key:

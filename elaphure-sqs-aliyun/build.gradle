@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(':elaphure-context')
+    api project(':elaphure-sqs')
+    implementation "com.aliyun.mns:java-messaging-lib:0.2.0"
+}
