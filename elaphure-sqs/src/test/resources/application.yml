@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        test-out-0:
+          destination: global-test
+        test-in-0:
+          destination: global-test
+      sqs:
+        bindings:
+          test-in-0:
+            consumer:
+              snsFanout: false
