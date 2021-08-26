@@ -5,23 +5,20 @@ import com.aliyun.mns.extended.javamessaging.Constants;
 import com.aliyun.mns.extended.javamessaging.MNSMessageConsumer;
 import com.aliyun.mns.extended.javamessaging.MNSQueueWrapper;
 import com.aliyun.mns.extended.javamessaging.acknowledge.Acknowledger;
-import com.aliyun.mns.extended.javamessaging.message.MNSBytesMessage;
-import com.aliyun.mns.extended.javamessaging.message.MNSJsonableMessage;
-import com.aliyun.mns.extended.javamessaging.message.MNSJsonableProperty;
-import com.aliyun.mns.extended.javamessaging.message.MNSMessage;
+import com.aliyun.mns.extended.javamessaging.message.*;
 import com.aliyun.mns.extended.javamessaging.message.MNSMessage.JMSMessagePropertyValue;
-import com.aliyun.mns.extended.javamessaging.message.MNSObjectMessage;
-import com.aliyun.mns.extended.javamessaging.message.MNSTextMessage;
 import com.aliyun.mns.extended.util.ExponentialBackoffStrategy;
 import com.aliyun.mns.model.Message;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.jms.JMSException;
 import javax.jms.MessageListener;
 import javax.jms.Session;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class MessageFetcher
         implements Runnable, MessageFetcherManager {
@@ -118,10 +115,14 @@ public class MessageFetcher
     /**
      * Pop messages with long-poll wait time of 20 seconds with available prefetch batch size and potential re-tries.
      */
-    protected Message getMessage() throws InterruptedException {
+    public Message getMessage() throws InterruptedException {
+        return getMessage(POLLING_WAIT_SECONDS);
+    }
+
+    public Message getMessage(int timeout) throws InterruptedException {
         Message message = null;
         try {
-            message = queue.popMessage(POLLING_WAIT_SECONDS);
+            message = queue.popMessage(timeout);
             if (message == null) {
                 LOG.debug("messages null");
             }
@@ -138,7 +139,11 @@ public class MessageFetcher
         return message;
     }
 
-    protected javax.jms.Message convertToJMSMessage(Message message) throws JMSException {
+    public javax.jms.Message convertToJMSMessage(Message message) throws JMSException {
+        if (message == null) {
+            return null;
+        }
+
         String messageBody = message.getMessageBodyAsString();
 
         MNSJsonableMessage jsonableMessage = JSON.parseObject(messageBody, MNSJsonableMessage.class);
@@ -157,10 +162,12 @@ public class MessageFetcher
             }
         }
 
+        String parsedMessageBody = Optional.ofNullable(jsonableMessage.getMessageBody()).orElse(messageBody);
+
         javax.jms.Message jmsMessage = null;
         if (MNSMessage.BYTE_MESSAGE_TYPE.equals(messageType)) {
             try {
-                jmsMessage = new MNSBytesMessage(jsonableMessage.getMessageBody(), jmsProperties,
+                jmsMessage = new MNSBytesMessage(parsedMessageBody, jmsProperties,
                         acknowledger, queue.getQueueURL(), message.getReceiptHandle());
             } catch (JMSException e) {
                 LOG.warn("MessageReceiptHandle - " + message.getReceiptHandle() +
@@ -168,10 +175,10 @@ public class MessageFetcher
                 throw e;
             }
         } else if (MNSMessage.OBJECT_MESSAGE_TYPE.equals(messageType)) {
-            jmsMessage = new MNSObjectMessage(jsonableMessage.getMessageBody(), jmsProperties,
+            jmsMessage = new MNSObjectMessage(parsedMessageBody, jmsProperties,
                     acknowledger, queue.getQueueURL(), message.getReceiptHandle());
         } else if (MNSMessage.TEXT_MESSAGE_TYPE.equals(messageType)) {
-            jmsMessage = new MNSTextMessage(jsonableMessage.getMessageBody(), jmsProperties,
+            jmsMessage = new MNSTextMessage(parsedMessageBody, jmsProperties,
                     acknowledger, queue.getQueueURL(), message.getReceiptHandle());
         } else {
             throw new JMSException("Not a supported JMS message type");

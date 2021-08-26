@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 
 import javax.jms.JMSException;
 import java.util.List;
+import java.util.Optional;
 
 public class MNSQueueWrapper {
     private static final Log LOG = LogFactory.getLog(MNSQueueWrapper.class);
@@ -86,11 +87,18 @@ public class MNSQueueWrapper {
         try {
             return this.queue.popMessage(pollingWaitSeconds);
         } catch (Exception e) {
+            if (checkNoMessage(e)) {
+                return null;
+            }
             throw handleException(e);
         }
     }
 
     public String getQueueURL() {
         return queue.getQueueURL();
+    }
+
+    private boolean checkNoMessage(Throwable e) {
+        return Optional.ofNullable(e.getMessage()).filter(message -> message.contains("MessageNotExist")).isPresent();
     }
 }

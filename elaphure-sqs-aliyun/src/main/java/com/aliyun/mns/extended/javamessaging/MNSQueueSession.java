@@ -417,14 +417,20 @@ public class MNSQueueSession implements Session, QueueSession {
     @Override
     public MessageConsumer createConsumer(Destination destination,
                                           String messageSelector) throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        if (messageSelector != null) {
+            throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        }
+        return createConsumer(destination);
     }
 
     /* Not support */
     @Override
     public MessageConsumer createConsumer(Destination destination,
                                           String messageSelector, boolean noLocal) throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        if (messageSelector != null) {
+            throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        }
+        return createConsumer(destination);
     }
 
     /**
@@ -433,7 +439,10 @@ public class MNSQueueSession implements Session, QueueSession {
     @Override
     public QueueReceiver createReceiver(Queue queue, String messageSelector)
             throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        if (messageSelector != null) {
+            throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        }
+        return createReceiver(queue);
     }
 
     /**

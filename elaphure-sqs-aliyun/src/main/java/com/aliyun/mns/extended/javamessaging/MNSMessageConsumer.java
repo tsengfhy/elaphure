@@ -3,17 +3,13 @@ package com.aliyun.mns.extended.javamessaging;
 import com.aliyun.mns.extended.fetcher.MessageFetcher;
 import com.aliyun.mns.extended.javamessaging.acknowledge.Acknowledger;
 import com.aliyun.mns.extended.util.ThreadFactoryHelper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.jms.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageListener;
-import javax.jms.Queue;
-import javax.jms.QueueReceiver;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 public class MNSMessageConsumer implements MessageConsumer, QueueReceiver {
     private static final Log LOG = LogFactory.getLog(MNSMessageConsumer.class);
@@ -140,16 +136,46 @@ public class MNSMessageConsumer implements MessageConsumer, QueueReceiver {
 
     @Override
     public Message receive() throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        Message message = null;
+        try {
+            message = messagePrefetcher.convertToJMSMessage(messagePrefetcher.getMessage());
+            return message;
+        } catch (InterruptedException e) {
+            throw new JMSException(e.getMessage());
+        } finally {
+            if (message != null && this.parentSession.getAcknowledgeMode() == Session.AUTO_ACKNOWLEDGE) {
+                message.acknowledge();
+            }
+        }
     }
 
     @Override
     public Message receive(long timeout) throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        Message message = null;
+        try {
+            message = messagePrefetcher.convertToJMSMessage(messagePrefetcher.getMessage((int) timeout / 1000));
+            return message;
+        } catch (InterruptedException e) {
+            throw new JMSException(e.getMessage());
+        } finally {
+            if (message != null && this.parentSession.getAcknowledgeMode() == Session.AUTO_ACKNOWLEDGE) {
+                message.acknowledge();
+            }
+        }
     }
 
     @Override
     public Message receiveNoWait() throws JMSException {
-        throw new JMSException(Constants.UNSUPPORTED_METHOD);
+        Message message = null;
+        try {
+            message = messagePrefetcher.convertToJMSMessage(messagePrefetcher.getMessage(0));
+            return message;
+        } catch (InterruptedException e) {
+            throw new JMSException(e.getMessage());
+        } finally {
+            if (message != null && this.parentSession.getAcknowledgeMode() == Session.AUTO_ACKNOWLEDGE) {
+                message.acknowledge();
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ public class MNSQueueConnection implements Connection, QueueConnection {
         MNSQueueSession session;
         if (acknowledgeMode == Session.AUTO_ACKNOWLEDGE) {
             session = new MNSQueueSession(this, AcknowledgeMode.ACK_AUTO.withOriginalAcknowledgeMode(acknowledgeMode));
-        } else if (acknowledgeMode == MNSQueueSession.MANUAL_ACKNOWLEDGE) {
+        } else if (acknowledgeMode == Session.CLIENT_ACKNOWLEDGE || acknowledgeMode == MNSQueueSession.MANUAL_ACKNOWLEDGE) {
             session = new MNSQueueSession(this, AcknowledgeMode.ACK_MANUAL.withOriginalAcknowledgeMode(acknowledgeMode));
         } else {
             LOG.error("Unrecognized acknowledgeMode. Cannot create Session.");
