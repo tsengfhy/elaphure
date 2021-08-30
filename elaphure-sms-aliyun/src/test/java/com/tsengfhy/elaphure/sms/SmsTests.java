@@ -1,9 +1,9 @@
 package com.tsengfhy.elaphure.sms;
 
 import com.tsengfhy.elaphure.constants.DateFormat;
+import com.tsengfhy.elaphure.sms.annotation.SmsListener;
 import com.tsengfhy.elaphure.sms.constants.SmsStatus;
 import com.tsengfhy.elaphure.sms.domain.SmsMessage;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -35,5 +35,14 @@ public class SmsTests {
                 .addParam("timestamp", LocalDateTime.now().format(DateTimeFormatter.ofPattern(DateFormat.DATETIME_FORMAT)));
         smsTemplate.send(message);
         Assertions.assertEquals(message.getStatus(), SmsStatus.SUCCESS);
+    }
+
+    static class Listener {
+
+        @SmsListener
+        public boolean onMessage(SmsMessage message) {
+            System.out.println(message.getContent());
+            return true;
+        }
     }
 }

@@ -13,15 +13,12 @@ import com.tsengfhy.elaphure.sms.exception.SmsException;
 import com.tsengfhy.elaphure.sms.exception.SmsServerException;
 import com.tsengfhy.elaphure.sms.mapper.SmsMessageMapper;
 import com.tsengfhy.elaphure.sms.mapper.SmsQueryMapper;
-import com.tsengfhy.elaphure.utils.JsonUtils;
 import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Builder
@@ -80,7 +77,8 @@ public class AliyunSmsTemplate implements SmsTemplate, InitializingBean {
     }
 
     @Override
-    public void setReplyListener(Function<SmsMessage, Boolean> function) throws SmsException {
-        smsService.startSmsUpMessageListener(message -> function.apply(SmsMessageMapper.INSTANCE.fromReply(JsonUtils.fromJson(message.getMessageBody(), HashMap.class))));
+    public SmsMessage receiveReply(String destinationName) throws SmsException {
+        // TODO
+        throw new SmsException(new UnsupportedOperationException());
     }
 }

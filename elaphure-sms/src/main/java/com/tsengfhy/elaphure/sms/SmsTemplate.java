@@ -5,7 +5,6 @@ import com.tsengfhy.elaphure.sms.domain.SmsQuery;
 import com.tsengfhy.elaphure.sms.exception.SmsException;
 
 import java.util.List;
-import java.util.function.Function;
 
 public interface SmsTemplate {
 
@@ -15,5 +14,5 @@ public interface SmsTemplate {
 
     List<SmsMessage> query(SmsQuery query) throws SmsException;
 
-    void setReplyListener(Function<SmsMessage, Boolean> function) throws SmsException;
+    SmsMessage receiveReply(String destinationName) throws SmsException;
 }

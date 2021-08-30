@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':elaphure-context')
+    implementation project(':elaphure-utils')
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     implementation "org.springframework:spring-web"
 }

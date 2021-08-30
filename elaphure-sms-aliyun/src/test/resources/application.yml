@@ -2,4 +2,5 @@ elaphure:
   access-key:
   secret-key:
   sms:
-    reply-queue:
+    reply-destination:
+

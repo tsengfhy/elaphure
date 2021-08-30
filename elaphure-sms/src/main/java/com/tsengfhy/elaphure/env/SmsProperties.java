@@ -12,5 +12,5 @@ public class SmsProperties {
     private String region;
     private String accessKey;
     private String secretKey;
-    private String replyQueue;
+    private String replyDestination;
 }
