@@ -1,0 +1,19 @@
+configurations {
+    implementation.exclude group: "com.github.xiaoymin", module: "knife4j-spring-boot-starter"
+}
+
+dependencies {
+    implementation project(':elaphure-context')
+    implementation project(':elaphure-web')
+    api 'org.springframework.cloud:spring-cloud-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    api 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-loadbalancer'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel'
+    implementation 'com.github.xiaoymin:knife4j-micro-spring-boot-starter'
+    testImplementation 'com.alibaba.csp:sentinel-datasource-nacos'
+}

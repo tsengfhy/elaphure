@@ -1,0 +1,18 @@
+server:
+  port: ${random.int[8080,8099]}
+
+spring:
+  application:
+    name: elaphure-cloud
+  profiles:
+    active: on-premise
+
+elaphure:
+  web:
+    open-api:
+      title: Cloud RESTful APIs
+      version: 1.0
+      contact: Tsengfhy
+      mail: tsengfhy@gmail.com
+      base-packages:
+        - com.tsengfhy.elaphure.controller

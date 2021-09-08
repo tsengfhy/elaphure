@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: http://localhost:8848
+      username: dev
+      password: dev
+      discovery:
+        namespace: 9afd2bf5-c77e-4120-95ab-01645355067f
+      config:
+        namespace: 9afd2bf5-c77e-4120-95ab-01645355067f
+        file-extension: yaml
+        extension-configs:
+          - data-id: db
+            file-extension: yaml
+            refresh: true
+    sentinel:
+      transport:
+        dashboard: http://localhost:8858
+      datasource:
+        ds:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: ${spring.cloud.nacos.config.namespace}
+            data-id: sentinel
+            rule-type: flow
+  sleuth:
+    sampler:
+      probability: 1
+  zipkin:
+    base-url: http://localhost:9411
