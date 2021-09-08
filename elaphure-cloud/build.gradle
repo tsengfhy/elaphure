@@ -1,0 +1,11 @@
+dependencies {
+    api "org.springframework.cloud:spring-cloud-starter-bootstrap"
+    api "org.springframework.cloud:spring-cloud-starter-openfeign"
+    api "org.springframework.cloud:spring-cloud-loadbalancer"
+    api "org.springframework.cloud:spring-cloud-starter-sleuth"
+    testImplementation project(":elaphure-web")
+    testImplementation "org.springframework.cloud:spring-cloud-sleuth-zipkin"
+    testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
+    testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
+    testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+}
