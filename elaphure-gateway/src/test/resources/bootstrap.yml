@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: elaphure-gateway
+  profiles:
+    include: tracing
+  cloud:
+    nacos:
+      server-addr: http://localhost:8848
+      username: dev
+      password: dev
+      discovery:
+        namespace: 9afd2bf5-c77e-4120-95ab-01645355067f
+      config:
+        namespace: 9afd2bf5-c77e-4120-95ab-01645355067f
+        file-extension: yaml
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true

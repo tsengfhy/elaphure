@@ -1,0 +1,11 @@
+#dynamic configuration support, using on nacos
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: cloud
+          uri: lb://elaphure-cloud
+          predicates:
+            - Path=/cloud/**
+          filters:
+            - RewritePath=/cloud/(?<remaining>.*), /$\{remaining}
