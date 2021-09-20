@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: cloud
+          uri: lb://elaphure-cloud
+          predicates:
+            - Path=/cloud/**
+          filters:
+            - StripPrefix=1
