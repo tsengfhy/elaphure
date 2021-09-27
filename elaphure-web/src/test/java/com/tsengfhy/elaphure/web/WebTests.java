@@ -66,4 +66,10 @@ class WebTests {
 
         XssUtils.setDefaultProcessStrategy(processStrategy);
     }
+
+    @Test
+    void testOpenAPI() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/v3/api-docs"))
+                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.OK.value()));
+    }
 }
