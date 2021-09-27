@@ -8,6 +8,8 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     api 'org.springframework.boot:spring-boot-starter-web'
     api 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter'
     implementation 'com.google.code.gson:gson'
     implementation 'org.apache.commons:commons-text:1.9'
     implementation 'org.owasp.antisamy:antisamy:1.6.3'

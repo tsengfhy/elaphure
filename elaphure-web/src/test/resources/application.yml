@@ -2,3 +2,13 @@ elaphure:
   web:
     cors:
       allowed-origins: www.elaphure.com
+    open-api:
+      title: Test RESTful APIs
+      version: 1.0
+      contact: Tsengfhy
+      mail: tsengfhy@gmail.com
+      base-packages:
+        - com.tsengfhy.elaphure.web
+#      group-map:
+#        V1:
+#          - com.tsengfhy.elaphure.web

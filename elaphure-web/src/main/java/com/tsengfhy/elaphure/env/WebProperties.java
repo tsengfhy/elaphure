@@ -10,8 +10,7 @@ import org.springframework.web.cors.CorsConfiguration;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +20,7 @@ public class WebProperties {
 
     private final Cors cors = new Cors();
     private final Xss xss = new Xss();
+    private final OpenApi openApi = new OpenApi();
 
     @Data
     public static class Cors {
@@ -45,5 +45,19 @@ public class WebProperties {
             FILTER,
             ENCODE,
         }
+    }
+
+    @Data
+    public static class OpenApi {
+        private String title;
+        private String description;
+        private String version;
+        private String termsOfService;
+        private String contact;
+        private String url;
+        private String mail;
+
+        private List<String> basePackages = Collections.emptyList();
+        private Map<String, List<String>> groupMap = Collections.emptyMap();
     }
 }

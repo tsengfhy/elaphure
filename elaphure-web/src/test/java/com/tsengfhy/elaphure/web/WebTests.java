@@ -102,4 +102,10 @@ class WebTests {
                 MessageUtils.getMessage("test.error")
         );
     }
+
+    @Test
+    void testOpenApi() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/v3/api-docs"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.tags[0].name").value("测试接口"));
+    }
 }
