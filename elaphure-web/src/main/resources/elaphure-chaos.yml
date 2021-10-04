@@ -1,0 +1,21 @@
+chaos:
+  monkey:
+    enabled: true
+    assaults:
+      level: 5
+      latency-active: true
+      latency-range-start: 3000
+      latency-range-end: 5000
+      exceptions-active: false
+      exception:
+        type: org.springframework.web.server.ResponseStatusException
+        arguments: [
+          {
+            type: org.springframework.http.HttpStatus,
+            value: INTERNAL_SERVER_ERROR
+          },
+        ]
+      kill-application-active: true
+      kill-application-cron-expression: '0 0 8 ? * MON#1'
+    watcher:
+      service: true
