@@ -2,3 +2,15 @@
 server:
   error:
     include-binding-errors: always
+
+chaos:
+  monkey:
+    enabled: true
+    assaults:
+      level: 5
+      latency-active: true
+      latency-range-end: 5000
+      kill-application-active: true
+      runtime-assault-cron-expression: '0 0 8 ? * MON#1'
+    watcher:
+      rest-controller: true
