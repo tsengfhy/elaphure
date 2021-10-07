@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    initialization-mode: always
+    dynamic:
+      datasource:
+        master:
+          driver-class-name: org.h2.Driver
+          url: jdbc:h2:mem:elaphure
+          username: root
+          password: admin
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-enums-package: com.tsengfhy.elaphure.constants

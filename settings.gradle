@@ -3,6 +3,7 @@ rootProject.name = 'elaphure'
 include(':elaphure-context')
 include(':elaphure-utils')
 include(':elaphure-web')
+include(':elaphure-data')
 include(':elaphure-sqs')
 include(':elaphure-sqs-aliyun')
 include(':elaphure-s3')

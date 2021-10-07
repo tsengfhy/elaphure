@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':elaphure-context')
+    api 'com.baomidou:mybatis-plus-boot-starter:3.4.3'
+    api 'com.baomidou:dynamic-datasource-spring-boot-starter:3.4.1'
+    runtimeOnly 'mysql:mysql-connector-java'
+    testRuntimeOnly 'com.h2database:h2'
+}
