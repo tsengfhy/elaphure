@@ -1,0 +1,8 @@
+ext {
+    mybatisPlusVersion = "3.5.7"
+}
+
+dependencies {
+    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    testRuntimeOnly "com.h2database:h2"
+}
