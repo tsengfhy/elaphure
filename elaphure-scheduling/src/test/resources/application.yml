@@ -1,0 +1,4 @@
+elaphure:
+  scheduling:
+    command-line:
+      enabled: true
