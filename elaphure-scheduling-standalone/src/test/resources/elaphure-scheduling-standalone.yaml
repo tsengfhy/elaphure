@@ -1,0 +1,11 @@
+elaphure:
+  scheduling:
+    standalone:
+      jobs:
+        DEFAULT:
+          TestJob:
+            cron: 0/5 * * * * ?
+            parameters:
+              key:
+                - value1
+                - value2

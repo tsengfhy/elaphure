@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+  quartz:
+    job-store-type: jdbc
+    wait-for-jobs-to-complete-on-shutdown: true
+#    jdbc:
+#      initialize-schema: ALWAYS
+#      schema: classpath:schema.sql
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: scheduler
+            instanceId: AUTO
+            instanceIdGenerator:
+              class: org.quartz.simpl.HostnameInstanceIdGenerator
+            skipUpdateCheck: true
+          threadPool:
+            threadCount: 10
+          jobStore:
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            tablePrefix: SYS_SCHEDULING_
+            useProperties: true
+            isClustered: true

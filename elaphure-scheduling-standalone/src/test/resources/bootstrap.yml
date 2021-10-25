@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: elaphure-scheduling-standalone
+  cloud:
+    nacos:
+      server-addr: http://localhost:8848
+      config:
+        enabled: false
+        file-extension: yaml

@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: memory
+#    active: persistence
+
+elaphure:
+  scheduling:
+    standalone:
+      jobs:
+        DEFAULT:
+          TestJob:
+            cron: 0/1 * * * * ?
+            parameters:
+              key:
+                - value1
+                - value2
