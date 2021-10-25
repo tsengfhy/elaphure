@@ -1,5 +1,13 @@
 dependencies {
     implementation project(':elaphure-context')
     api project(':elaphure-scheduling')
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
+    implementation 'org.apache.commons:commons-lang3'
+    compileOnly 'org.springframework.cloud:spring-cloud-context'
+    testImplementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    testImplementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    testRuntimeOnly 'mysql:mysql-connector-java'
+    testRuntimeOnly 'com.h2database:h2'
 }

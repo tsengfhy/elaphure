@@ -1,0 +1,25 @@
+spring:
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org.quartz.scheduler.instanceName: scheduler
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      org.quartz.jobStore.isClustered: true
+      org.quartz.jobStore.useProperties: true
+      org.quartz.jobStore.acquireTriggersWithinLock: true
+      org.quartz.jobStore.tablePrefix: SYS_SCHEDULING_
+      org.quartz.jobStore.clusterCheckinInterval: 20000
+      org.quartz.jobStore.misfireThreshold: 60000
+      org.quartz.threadPool.class: org.quartz.simpl.SimpleThreadPool
+      org.quartz.threadPool.threadCount: 10
+      org.quartz.threadPool.threadPriority: 5
+      org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true
+    #support update job schedule via spring bean config
+    overwrite-existing-jobs: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/elaphure
+    username: root
+    password: admin
