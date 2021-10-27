@@ -1,0 +1,6 @@
+spring:
+  schedulerx2:
+    endpoint: acm.aliyun.com
+    namespace: 438451e8-32d6-4dc7-ada7-6e5b3f05e605
+    group-id: elaphure
+    app-key:
