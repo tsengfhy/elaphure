@@ -3,9 +3,8 @@ dependencies {
     implementation project(':elaphure-utils')
     api project(':elaphure-scheduling')
     api 'org.springframework.boot:spring-boot-starter-quartz'
+    compileOnly 'org.springframework.cloud:spring-cloud-context'
     testImplementation 'org.springframework.boot:spring-boot-starter-jdbc'
     testRuntimeOnly 'org.postgresql:postgresql'
-    compileOnly 'org.springframework.cloud:spring-cloud-context'
-    testImplementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     testImplementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 }

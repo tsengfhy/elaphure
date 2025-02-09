@@ -1,6 +1,6 @@
 package com.tsengfhy.elaphure.env;
 
-import com.tsengfhy.elaphure.constants.Context;
+import com.tsengfhy.elaphure.constant.Context;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

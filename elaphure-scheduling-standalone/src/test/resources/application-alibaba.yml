@@ -1,0 +1,9 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: http://localhost:8848
+      config:
+        enabled: false
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml

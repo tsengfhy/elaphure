@@ -6,7 +6,7 @@ import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.MediaType;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class ErrorAttributeOptionsConfigurerAdapter extends BasicErrorController implements ErrorAttributeOptionsConfigurer {
 

@@ -4,7 +4,7 @@ import com.tsengfhy.entry.domain.Domain;
 import com.tsengfhy.entry.exception.TestException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(TestController.PATH)

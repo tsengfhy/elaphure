@@ -1,6 +1,6 @@
 package com.tsengfhy.elaphure.exception;
 
-import com.tsengfhy.elaphure.constants.WebMessages;
+import com.tsengfhy.elaphure.constant.WebMessages;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

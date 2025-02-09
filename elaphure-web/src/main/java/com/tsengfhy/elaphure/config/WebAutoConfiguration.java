@@ -1,6 +1,6 @@
 package com.tsengfhy.elaphure.config;
 
-import com.tsengfhy.elaphure.constants.Context;
+import com.tsengfhy.elaphure.constant.Context;
 import com.tsengfhy.elaphure.env.WebProperties;
 import com.tsengfhy.elaphure.web.cors.RestCorsProcessor;
 import com.tsengfhy.elaphure.web.servlet.filter.OrderedCorsFilter;
@@ -23,7 +23,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.util.UrlPathHelper;
 
-import javax.servlet.Servlet;
+import jakarta.servlet.Servlet;
 
 @AutoConfiguration(after = WebMvcAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)

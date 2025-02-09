@@ -19,11 +19,11 @@ class CommandLineSchedulingTests {
 
     @Test
     void testExecute() {
-        Assertions.assertEquals(firstJob.getValue(), FirstJob.VALUE);
+        Assertions.assertEquals(FirstJob.VALUE, firstJob.getValue());
     }
 
     @Test
     void testOrchestration() {
-        Assertions.assertEquals(secondJob.getValue(), FirstJob.VALUE);
+        Assertions.assertEquals(FirstJob.VALUE, secondJob.getValue());
     }
 }

@@ -1,8 +1,8 @@
 ext {
     antisamyVersion = "1.7.5"
     commonsTextVersion = "1.10.0"
-    springDocVersion = "1.7.0"
-    chaosMonkeyVersion = "2.7.2"
+    springDocVersion = "2.5.0"
+    chaosMonkeyVersion = "3.1.0"
 }
 
 dependencies {
@@ -11,8 +11,8 @@ dependencies {
     api "org.springframework.boot:spring-boot-starter-web"
     api "org.springframework.boot:spring-boot-starter-validation"
     api "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springdoc:springdoc-openapi-ui:${springDocVersion}"
-    implementation "de.codecentric:chaos-monkey-spring-boot:${chaosMonkeyVersion}"
+    api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocVersion}"
     implementation "org.owasp.antisamy:antisamy:${antisamyVersion}"
     implementation "org.apache.commons:commons-text:${commonsTextVersion}"
+    implementation "de.codecentric:chaos-monkey-spring-boot:${chaosMonkeyVersion}"
 }

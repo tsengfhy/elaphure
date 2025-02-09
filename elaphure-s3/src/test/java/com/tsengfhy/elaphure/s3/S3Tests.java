@@ -68,8 +68,8 @@ class S3Tests {
 
         try (InputStream is = new ClassPathResource("/static/img/" + OBJECT).getInputStream()) {
             minioClient.putObject(PutObjectArgs.builder().bucket(BUCKET).object(OBJECT).stream(is, is.available(), -1).contentType("image/jpeg").build());
-            final String presignedUrl = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().bucket(BUCKET).method(Method.GET).object(OBJECT).expiry(1, TimeUnit.MINUTES).build());
-            Assertions.assertEquals(new OkHttpClient().newCall(new Request.Builder().get().url(presignedUrl).build()).execute().code(), 200);
+            final String presignedObjectUrl = minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder().bucket(BUCKET).method(Method.GET).object(OBJECT).expiry(1, TimeUnit.MINUTES).build());
+            Assertions.assertEquals(200, new OkHttpClient().newCall(new Request.Builder().get().url(presignedObjectUrl).build()).execute().code());
         }
     }
 }

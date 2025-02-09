@@ -1,8 +1,8 @@
 package com.tsengfhy.elaphure.web;
 
 import com.tsengfhy.elaphure.env.WebProperties;
-import com.tsengfhy.elaphure.utils.JsonUtils;
-import com.tsengfhy.elaphure.utils.XssUtils;
+import com.tsengfhy.elaphure.util.JsonUtils;
+import com.tsengfhy.elaphure.util.XssUtils;
 import com.tsengfhy.entry.Application;
 import com.tsengfhy.entry.controller.TestController;
 import com.tsengfhy.entry.domain.Domain;

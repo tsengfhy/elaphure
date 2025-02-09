@@ -1,5 +1,5 @@
 ext {
-    minioVersion = "8.5.2"
+    minioVersion = "8.5.17"
 }
 
 dependencies {

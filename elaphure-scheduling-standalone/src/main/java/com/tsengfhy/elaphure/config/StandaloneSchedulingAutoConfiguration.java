@@ -1,10 +1,10 @@
 package com.tsengfhy.elaphure.config;
 
-import com.tsengfhy.elaphure.constants.Context;
+import com.tsengfhy.elaphure.constant.Context;
 import com.tsengfhy.elaphure.env.StandaloneSchedulingProperties;
 import com.tsengfhy.elaphure.scheduling.StandaloneSchedulingJobRegistrar;
 import com.tsengfhy.elaphure.scheduling.StandaloneSchedulingJobRegistry;
-import com.tsengfhy.elaphure.utils.QuartzUtils;
+import com.tsengfhy.elaphure.util.QuartzUtils;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

@@ -11,10 +11,10 @@ import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -42,7 +42,7 @@ class WebSupportTests {
         filter = new WhitelistFilter() {
             @Override
             protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-                Assertions.assertNotEquals(request.getParameter(NAME), VALUE);
+                Assertions.assertNotEquals(VALUE, request.getParameter(NAME));
             }
         };
         filter.doFilter(mockRequest, mockResponse, mockFilterChain);
@@ -52,14 +52,14 @@ class WebSupportTests {
     void testParameterMappingRequestWrapper() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter(NAME, RandomStringUtils.random(8));
-        Assertions.assertNotEquals(request.getParameter(NAME), VALUE);
-        Assertions.assertNotEquals(request.getParameterValues(NAME)[0], VALUE);
-        Assertions.assertNotEquals(request.getParameterMap().get(NAME)[0], VALUE);
+        Assertions.assertNotEquals(VALUE, request.getParameter(NAME));
+        Assertions.assertNotEquals(VALUE, request.getParameterValues(NAME)[0]);
+        Assertions.assertNotEquals(VALUE, request.getParameterMap().get(NAME)[0]);
 
         ParameterMappingRequestWrapper requestWrapper = new ParameterMappingRequestWrapper(request, value -> VALUE);
-        Assertions.assertEquals(requestWrapper.getParameter(NAME), VALUE);
-        Assertions.assertEquals(requestWrapper.getParameterValues(NAME)[0], VALUE);
-        Assertions.assertEquals(requestWrapper.getParameterMap().get(NAME)[0], VALUE);
+        Assertions.assertEquals(VALUE, requestWrapper.getParameter(NAME));
+        Assertions.assertEquals(VALUE, requestWrapper.getParameterValues(NAME)[0]);
+        Assertions.assertEquals(VALUE, requestWrapper.getParameterMap().get(NAME)[0]);
     }
 
     @Test

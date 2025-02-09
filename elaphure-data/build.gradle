@@ -3,6 +3,6 @@ ext {
 }
 
 dependencies {
-    api "com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}"
+    api "com.baomidou:mybatis-plus-spring-boot3-starter:${mybatisPlusVersion}"
     testRuntimeOnly "com.h2database:h2"
 }

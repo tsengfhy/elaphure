@@ -1,5 +1,6 @@
 package com.tsengfhy.elaphure.config;
 
+import org.jetbrains.annotations.Nullable;
 import org.simplejavamail.api.mailer.Mailer;
 import org.simplejavamail.api.mailer.MailerGenericBuilder;
 import org.simplejavamail.config.ConfigLoader;
@@ -14,7 +15,6 @@ import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
 import org.springframework.boot.context.properties.PropertyMapper;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.lang.Nullable;
 
 import java.util.Locale;
 import java.util.Properties;
@@ -22,7 +22,7 @@ import java.util.Properties;
 @AutoConfiguration(after = MailSenderAutoConfiguration.class)
 @ConditionalOnClass(Mailer.class)
 @Conditional(SESAutoConfiguration.SESCondition.class)
-public class SESAutoConfiguration extends SimpleJavaMailSpringSupport {
+class SESAutoConfiguration extends SimpleJavaMailSpringSupport {
 
     @Autowired
     private MailProperties mailProperties;
@@ -35,12 +35,14 @@ public class SESAutoConfiguration extends SimpleJavaMailSpringSupport {
             @Value("${simplejavamail.smtp.port:#{null}}") @Nullable String smtpPort,
             @Value("${simplejavamail.smtp.username:#{null}}") @Nullable String smtpUsername,
             @Value("${simplejavamail.smtp.password:#{null}}") @Nullable String smtpPassword,
+            @Value("${simplejavamail.disable.all.clientvalidation:#{null}}") @Nullable String disableAllClientValidation,
             @Value("${simplejavamail.custom.sslfactory.class:#{null}}") @Nullable String customSSLFactoryClass,
             @Value("${simplejavamail.proxy.host:#{null}}") @Nullable String proxyHost,
             @Value("${simplejavamail.proxy.port:#{null}}") @Nullable String proxyPort,
             @Value("${simplejavamail.proxy.username:#{null}}") @Nullable String proxyUsername,
             @Value("${simplejavamail.proxy.password:#{null}}") @Nullable String proxyPassword,
             @Value("${simplejavamail.proxy.socks5bridge.port:#{null}}") @Nullable String proxySocks5bridgePort,
+            @Value("${simplejavamail.defaults.content.transfer.encoding:#{null}}") @Nullable String defaultContentTransferEncoding,
             @Value("${simplejavamail.defaults.subject:#{null}}") @Nullable String defaultSubject,
             @Value("${simplejavamail.defaults.from.name:#{null}}") @Nullable String defaultFromName,
             @Value("${simplejavamail.defaults.from.address:#{null}}") @Nullable String defaultFromAddress,
@@ -100,12 +102,14 @@ public class SESAutoConfiguration extends SimpleJavaMailSpringSupport {
                 smtpPort,
                 smtpUsername,
                 smtpPassword,
+                disableAllClientValidation,
                 customSSLFactoryClass,
                 proxyHost,
                 proxyPort,
                 proxyUsername,
                 proxyPassword,
                 proxySocks5bridgePort,
+                defaultContentTransferEncoding,
                 defaultSubject,
                 defaultFromName,
                 defaultFromAddress,

@@ -1,5 +1,5 @@
 ext {
-    simpleJavaMailVersion = '6.7.6'
+    simpleJavaMailVersion = '7.9.1'
 }
 
 dependencies {

@@ -1,6 +1,6 @@
 package com.tsengfhy.elaphure.config;
 
-import com.tsengfhy.elaphure.constants.Context;
+import com.tsengfhy.elaphure.constant.Context;
 import com.tsengfhy.elaphure.env.CommandLineSchedulingProperties;
 import com.tsengfhy.elaphure.scheduling.AbstractJobExecutor;
 import com.tsengfhy.elaphure.scheduling.CommandLineJobExecutor;

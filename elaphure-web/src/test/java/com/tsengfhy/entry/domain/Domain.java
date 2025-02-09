@@ -3,7 +3,7 @@ package com.tsengfhy.entry.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 @Data
 @Accessors(chain = true)

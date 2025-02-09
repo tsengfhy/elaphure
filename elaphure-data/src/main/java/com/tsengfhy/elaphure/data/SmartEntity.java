@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SmartEntity extends BaseEntity {
+public abstract class SmartEntity extends BaseEntity {
 
     @TableId
     private Long id;

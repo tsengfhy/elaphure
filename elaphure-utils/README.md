@@ -3,5 +3,5 @@
 ## Features
 
 - Commons-lang3 integration
-- Mapstruct integration
-- Add customized utils
+- Customized tools
+- Build-in validation

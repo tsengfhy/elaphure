@@ -1,8 +1,8 @@
 package com.tsengfhy.elaphure.config;
 
 import com.tsengfhy.elaphure.env.WebProperties;
-import com.tsengfhy.elaphure.utils.ResponseUtils;
-import com.tsengfhy.elaphure.utils.XssUtils;
+import com.tsengfhy.elaphure.util.ResponseUtils;
+import com.tsengfhy.elaphure.util.XssUtils;
 import com.tsengfhy.elaphure.web.error.ErrorAttributeOptionsConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -15,7 +15,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.Servlet;
+import jakarta.servlet.Servlet;
 
 @AutoConfiguration(after = {WebAutoConfiguration.class, ErrorMvcAutoConfiguration.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)

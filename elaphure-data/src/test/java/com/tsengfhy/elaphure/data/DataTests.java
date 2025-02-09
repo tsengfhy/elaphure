@@ -3,10 +3,10 @@ package com.tsengfhy.elaphure.data;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.tsengfhy.entry.constants.Sex;
+import com.tsengfhy.entry.Application;
+import com.tsengfhy.entry.constant.Sex;
 import com.tsengfhy.entry.domain.User;
 import com.tsengfhy.entry.mapper.UserMapper;
-import com.tsengfhy.entry.Application;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ class DataTests {
         Sex sex = Sex.MALE;
         User user = new User().setName("tsengfhy").setAge(18).setEmail("tsengfhy@gmail.com").setSex(Sex.MALE);
         userMapper.insert(user);
-        Assertions.assertEquals(userMapper.selectById(user.getId()).getSex(), sex);
+        Assertions.assertEquals(sex, userMapper.selectById(user.getId()).getSex());
     }
 
     @Test
@@ -39,8 +39,8 @@ class DataTests {
         userMapper.insert(user);
         user = userMapper.selectById(user.getId()).setAge(24);
         Integer version = user.getVersion();
-        Assertions.assertNotEquals(userMapper.updateById(user), 0);
-        Assertions.assertNotEquals(user.getVersion(), version);
+        Assertions.assertNotEquals(0, userMapper.updateById(user));
+        Assertions.assertNotEquals(version, user.getVersion());
     }
 
     @Test
@@ -57,8 +57,8 @@ class DataTests {
         User user = new User().setName("tsengfhy").setAge(18).setEmail("tsengfhy@gmail.com");
         userMapper.insert(user);
         userMapper.deleteById(user.getId());
-        Assertions.assertEquals(userMapper.selectCount(Wrappers.<User>lambdaQuery().eq(User::getId, user.getId())), 0);
-        Assertions.assertNotEquals(userMapper.selectRawCount(user.getId()), 0);
+        Assertions.assertEquals(0, userMapper.selectCount(Wrappers.<User>lambdaQuery().eq(User::getId, user.getId())));
+        Assertions.assertNotEquals(0, userMapper.selectRawCount(user.getId()));
     }
 
     @Test

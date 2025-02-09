@@ -1,8 +1,8 @@
 package com.tsengfhy.elaphure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tsengfhy.elaphure.utils.JsonUtils;
-import com.tsengfhy.elaphure.utils.MessageUtils;
+import com.tsengfhy.elaphure.util.JsonUtils;
+import com.tsengfhy.elaphure.util.MessageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

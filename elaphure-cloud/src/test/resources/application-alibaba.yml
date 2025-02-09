@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: http://localhost:8848
+      discovery:
+        enabled: true
+      config:
+        enabled: true
+    sentinel:
+      enabled: false
+      transport:
+        dashboard: http://localhost:8080
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml
+
+feign:
+  sentinel:
+    enabled: ${spring.cloud.sentinel.enabled}
+

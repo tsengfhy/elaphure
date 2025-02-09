@@ -1,7 +1,7 @@
 package com.tsengfhy.elaphure.scheduling;
 
 import com.tsengfhy.elaphure.exception.NoJobSpecifiedException;
-import com.tsengfhy.elaphure.utils.QuartzUtils;
+import com.tsengfhy.elaphure.util.QuartzUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobDataMap;

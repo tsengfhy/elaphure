@@ -1,7 +1,7 @@
 package com.tsengfhy.elaphure.env;
 
-import com.tsengfhy.elaphure.constants.Context;
-import com.tsengfhy.elaphure.utils.XssUtils;
+import com.tsengfhy.elaphure.constant.Context;
+import com.tsengfhy.elaphure.util.XssUtils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.convert.DurationUnit;
@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
@@ -27,7 +26,7 @@ public class WebProperties {
     public static class Cors {
         private boolean enabled = true;
         private List<String> allowedOriginPatterns = Collections.singletonList(CorsConfiguration.ALL);
-        private List<String> allowedMethods = Stream.of(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE).map(HttpMethod::name).collect(Collectors.toList());
+        private List<String> allowedMethods = Stream.of(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.DELETE).map(HttpMethod::name).toList();
         private List<String> allowedHeaders = Collections.singletonList(CorsConfiguration.ALL);
         private List<String> exposedHeaders = Collections.singletonList(HttpHeaders.LOCATION);
         private boolean allowCredentials = true;

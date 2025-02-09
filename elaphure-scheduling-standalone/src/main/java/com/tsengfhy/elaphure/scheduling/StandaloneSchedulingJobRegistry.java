@@ -1,7 +1,7 @@
 package com.tsengfhy.elaphure.scheduling;
 
 import com.tsengfhy.elaphure.env.StandaloneSchedulingProperties;
-import com.tsengfhy.elaphure.utils.QuartzUtils;
+import com.tsengfhy.elaphure.util.QuartzUtils;
 import lombok.Setter;
 import org.quartz.*;
 

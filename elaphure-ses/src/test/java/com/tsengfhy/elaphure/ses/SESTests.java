@@ -6,12 +6,11 @@ import org.simplejavamail.api.email.Email;
 import org.simplejavamail.api.mailer.Mailer;
 import org.simplejavamail.email.EmailBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
-import javax.activation.FileDataSource;
+import jakarta.activation.FileDataSource;
 import java.io.IOException;
 
 @SpringBootTest(classes = Application.class)

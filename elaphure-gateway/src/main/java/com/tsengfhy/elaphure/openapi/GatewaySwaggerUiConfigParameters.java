@@ -1,10 +1,10 @@
 package com.tsengfhy.elaphure.openapi;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springdoc.core.AbstractSwaggerUiConfigProperties;
-import org.springdoc.core.SpringDocConfigProperties;
-import org.springdoc.core.SwaggerUiConfigParameters;
-import org.springdoc.core.SwaggerUiConfigProperties;
+import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties;
+import org.springdoc.core.properties.SpringDocConfigProperties;
+import org.springdoc.core.properties.SwaggerUiConfigParameters;
+import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.util.Assert;
 

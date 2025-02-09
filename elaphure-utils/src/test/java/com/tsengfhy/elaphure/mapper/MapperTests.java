@@ -1,6 +1,6 @@
 package com.tsengfhy.elaphure.mapper;
 
-import com.tsengfhy.elaphure.constants.DateFormat;
+import com.tsengfhy.elaphure.constant.DateFormat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

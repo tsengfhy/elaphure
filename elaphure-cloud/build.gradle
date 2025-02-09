@@ -1,11 +1,12 @@
 dependencies {
-    api "org.springframework.cloud:spring-cloud-starter-bootstrap"
     api "org.springframework.cloud:spring-cloud-starter-openfeign"
     api "org.springframework.cloud:spring-cloud-loadbalancer"
-    api "org.springframework.cloud:spring-cloud-starter-sleuth"
+    implementation "io.micrometer:micrometer-tracing"
+    implementation "io.github.openfeign:feign-micrometer"
     testImplementation project(":elaphure-web")
-    testImplementation "org.springframework.cloud:spring-cloud-sleuth-zipkin"
     testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery"
     testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config"
     testImplementation "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+    testImplementation "io.micrometer:micrometer-tracing-bridge-otel"
+    testImplementation "io.opentelemetry:opentelemetry-exporter-zipkin"
 }

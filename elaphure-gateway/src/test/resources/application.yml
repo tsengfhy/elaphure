@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: elaphure-gateway
+  profiles:
+    include:
+    - alibaba
+    - tracing
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+        - gateway

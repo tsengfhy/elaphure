@@ -17,6 +17,6 @@ class ContextTests {
 
     @Test
     void testYamlPropertySource() {
-        Assertions.assertEquals(Optional.ofNullable(properties).map(ContextProperties::getAccessKey).orElse(""), "access");
+        Assertions.assertEquals("access", Optional.ofNullable(properties).map(ContextProperties::getAccessKey).orElse(""));
     }
 }

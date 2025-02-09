@@ -16,6 +16,6 @@ class StandaloneSchedulingTests {
     @Test
     void testRun() throws Exception {
         Thread.sleep(2000L);
-        Assertions.assertEquals(testJob.getValue(), TestJob.VALUE);
+        Assertions.assertEquals(TestJob.VALUE, testJob.getValue());
     }
 }

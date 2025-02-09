@@ -3,8 +3,8 @@ package com.tsengfhy.elaphure.validation;
 import com.tsengfhy.elaphure.validation.annotation.Cron;
 import org.springframework.scheduling.support.CronExpression;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
 public class CronValidator implements ConstraintValidator<Cron, String> {

@@ -1,0 +1,12 @@
+server:
+  port: ${random.int[8081,8089]}
+
+spring:
+  application:
+    name: elaphure-cloud
+  profiles:
+    include:
+    - alibaba
+    - tracing
+  main:
+    allow-circular-references: true

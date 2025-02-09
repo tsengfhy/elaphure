@@ -1,7 +1,11 @@
 spring:
+  application:
+    name: elaphure-scheduling-standalone
   profiles:
-    active: memory
-#    active: persistence
+    include:
+      - memory
+#      - persistence
+      - alibaba
 
 elaphure:
   scheduling:

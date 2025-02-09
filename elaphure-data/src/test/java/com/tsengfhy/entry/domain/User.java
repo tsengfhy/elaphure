@@ -1,7 +1,7 @@
 package com.tsengfhy.entry.domain;
 
 import com.tsengfhy.elaphure.data.SmartEntity;
-import com.tsengfhy.entry.constants.Sex;
+import com.tsengfhy.entry.constant.Sex;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
