@@ -1,4 +1,3 @@
 dependencies {
     implementation project(':elaphure-context')
-    implementation 'org.apache.commons:commons-lang3'
 }

@@ -1,7 +1,6 @@
 package com.tsengfhy.elaphure.scheduling;
 
 import com.tsengfhy.elaphure.exception.NoJobSpecifiedException;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
@@ -16,7 +15,7 @@ public class CommandLineJobExecutor extends AbstractJobExecutor implements Appli
         List<Job> jobs = Optional.ofNullable(parameters.get(JOB_NAME_KEY))
                 .orElseGet(Collections::emptyList)
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(jobName -> jobName != null && !jobName.trim().isEmpty())
                 .map(this::resolveJob)
                 .collect(Collectors.toCollection(LinkedList::new));
 

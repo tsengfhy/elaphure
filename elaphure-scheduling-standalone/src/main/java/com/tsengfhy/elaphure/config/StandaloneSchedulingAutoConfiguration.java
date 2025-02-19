@@ -58,15 +58,13 @@ class StandaloneSchedulingAutoConfiguration {
 
         @Bean
         StandaloneSchedulingJobRegistrar<ApplicationStartedEvent> applicationStartedJobRegistrar() {
-            return new StandaloneSchedulingJobRegistrar<>(jobRegistry, properties) {
-            };
+            return new StandaloneSchedulingJobRegistrar<>(jobRegistry, properties);
         }
 
         @Bean
         @ConditionalOnClass(RefreshScopeRefreshedEvent.class)
         StandaloneSchedulingJobRegistrar<RefreshScopeRefreshedEvent> refreshScopeRefreshedJobRegistrar() {
-            return new StandaloneSchedulingJobRegistrar<>(jobRegistry, properties) {
-            };
+            return new StandaloneSchedulingJobRegistrar<>(jobRegistry, properties);
         }
     }
 }

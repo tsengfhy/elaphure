@@ -2,7 +2,6 @@ package com.tsengfhy.elaphure.scheduling;
 
 import com.tsengfhy.elaphure.exception.NoJobSpecifiedException;
 import com.tsengfhy.elaphure.util.QuartzUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
@@ -19,7 +18,7 @@ public class DelegatingJob extends AbstractJobExecutor implements org.quartz.Job
         Optional.ofNullable(parameters.get(JOB_NAME_KEY))
                 .orElseGet(Collections::emptyList)
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(jobName -> jobName != null && !jobName.trim().isEmpty())
                 .findFirst()
                 .map(this::resolveJob)
                 .orElseThrow(NoJobSpecifiedException::new)

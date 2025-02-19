@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
 @AllArgsConstructor
-public abstract class StandaloneSchedulingJobRegistrar<E extends ApplicationEvent> implements ApplicationListener<E> {
+public class StandaloneSchedulingJobRegistrar<E extends ApplicationEvent> implements ApplicationListener<E> {
 
     private StandaloneSchedulingJobRegistry jobRegistry;
     private StandaloneSchedulingProperties properties;

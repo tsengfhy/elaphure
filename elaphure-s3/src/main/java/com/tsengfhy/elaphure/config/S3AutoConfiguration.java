@@ -18,14 +18,11 @@ class S3AutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    MinioClient minioClient(S3Properties s3Properties, ContextProperties contextProperties) {
-        final String accessKey = Optional.ofNullable(s3Properties.getAccessKey()).filter(value -> !value.isBlank()).orElseGet(contextProperties::getAccessKey);
-        final String secretKey = Optional.ofNullable(s3Properties.getSecretKey()).filter(value -> !value.isBlank()).orElseGet(contextProperties::getSecretKey);
-
+    MinioClient minioClient(S3Properties s3Properties) {
         return MinioClient.builder()
                 .region(s3Properties.getRegion())
                 .endpoint(s3Properties.getEndpoint())
-                .credentials(accessKey, secretKey)
+                .credentials(s3Properties.getAccessKey(), s3Properties.getSecretKey())
                 .build();
     }
 }

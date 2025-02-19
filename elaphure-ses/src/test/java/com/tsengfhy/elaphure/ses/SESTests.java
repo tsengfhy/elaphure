@@ -14,7 +14,7 @@ import jakarta.activation.FileDataSource;
 import java.io.IOException;
 
 @SpringBootTest(classes = Application.class)
-@EnabledIf(expression = "#{!'${spring.mail.username}'.isBlank() && !'${spring.mail.password}'.isBlank()}", loadContext = true)
+@EnabledIf(expression = "#{!'${spring.mail.username:}'.isBlank() && !'${spring.mail.password:}'.isBlank()}", loadContext = true)
 class SESTests {
 
     @Autowired
